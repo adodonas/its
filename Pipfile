@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pillow = "~=9.5.0"
+packaging = "~=23.1"
+pyparsing = "~=3.0.9"
+numpy = "~=1.24.3"
+pandas = "~=2.0.1"
+matplotlib = "~=3.7.1"
+seaborn = "~=0.12.2"
+scikit-learn = "~=1.2.2"
+openpyxl = "*"
+requests = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
