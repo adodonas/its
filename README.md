@@ -14,6 +14,8 @@ Our objective through this project was to augment the understanding of how the C
 Here's a succinct overview of our dataset. During our thorough examination of multiple data sources, we encountered inconsistencies across various data fields. Consequently, we opted to gather data from specific databanks, namely the Ministry of Environmental Protection of Israel and the Meteorological Service of Israel. We also explored the databank of the Israel Central Bureau of Statistics but deemed it unsuitable due to the substantial costs associated with data cleaning and engineering.
 
 From the Ministry of Environmental Protection, we obtained principal pollution measures such as NO, NOX, NO2, SO2 (detailed explanations for each will follow). On the other hand, we sourced the WS, WD, and RH features from the Meteorological Service of Israel, features which have been highly recommended based on past studies. In addition to these, we incorporated categorical features such as the day of the week and area into our dataset.
+![](img/diagram.png)
+
 
 ### Features:
 * **NO:** Stands for Nitric Oxide, a colorless and poisonous gas that is a primary contributor to atmospheric pollution. It's primarily produced from the emissions of vehicles and power plants.
@@ -30,16 +32,16 @@ From the Ministry of Environmental Protection, we obtained principal pollution m
 
 * **RH:** Relative Humidity is the amount of moisture in the air compared to the maximum amount of moisture the air could hold at the same temperature. It's expressed as a percentage. High relative humidity can enhance the formation and persistence of certain air pollutants.
 
-Each of the features mentioned - NO, NOX, NO2, SO2, WS, WD, and RH - can provide valuable insights in the context of an air quality analysis. Here's why:
+Each of the features mentioned - **NO**, **NOX**, **NO2**, **SO2**, **WS**, **WD**, and **RH** - can provide valuable insights in the context of an air quality analysis. Here's why:
 
-NO, NOX, NO2, SO2: These are key pollutants that directly impact air quality. During COVID-19 lockdowns, many anthropogenic activities, such as driving vehicles or operating industrial plants, were significantly reduced. This potentially leads to a reduction in the emission of these pollutants. By tracking the levels of these pollutants, we can quantify the impact of lockdown measures on air quality. Machine learning can help identify patterns and correlations, predict future pollution levels, and even identify the sources of these pollutants.
+* **NO, NOX, NO2, SO2:** These are key pollutants that directly impact air quality. During COVID-19 lockdowns, many anthropogenic activities, such as driving vehicles or operating industrial plants, were significantly reduced. This potentially leads to a reduction in the emission of these pollutants. By tracking the levels of these pollutants, we can quantify the impact of lockdown measures on air quality. Machine learning can help identify patterns and correlations, predict future pollution levels, and even identify the sources of these pollutants.
 
-WS (Wind Speed): Wind can disperse or accumulate air pollutants, affecting air quality locally and regionally. During lockdowns, any changes in air pollution levels might be influenced not only by reduced human activities but also by weather conditions such as wind speed. ML can help in understanding the role of wind speed in the dispersion of pollutants and predicting how changes in wind patterns might affect future air quality.
+* **WS (Wind Speed):** Wind can disperse or accumulate air pollutants, affecting air quality locally and regionally. During lockdowns, any changes in air pollution levels might be influenced not only by reduced human activities but also by weather conditions such as wind speed. ML can help in understanding the role of wind speed in the dispersion of pollutants and predicting how changes in wind patterns might affect future air quality.
 
-WD (Wind Direction): Similar to wind speed, wind direction can significantly influence where pollutants are carried, potentially impacting air quality in different areas. Machine learning models can help analyze the impact of wind direction on pollutant distribution during the lockdown period.
+* **WD (Wind Direction):** Similar to wind speed, wind direction can significantly influence where pollutants are carried, potentially impacting air quality in different areas. Machine learning models can help analyze the impact of wind direction on pollutant distribution during the lockdown period.
 
-RH (Relative Humidity): Moisture in the air can react with certain pollutants, potentially leading to secondary pollutants or exacerbating pollution levels. High humidity can also trap pollutants close to the ground. Incorporating RH into ML models allows for a more comprehensive understanding of air quality dynamics during the lockdown.
+* **RH (Relative Humidity):** Moisture in the air can react with certain pollutants, potentially leading to secondary pollutants or exacerbating pollution levels. High humidity can also trap pollutants close to the ground. Incorporating RH into ML models allows for a more comprehensive understanding of air quality dynamics during the lockdown.
 
-Finally, the day of the week and the area are also useful features. Lockdown measures may vary by area and day of the week, which can influence human activities and thus air pollution levels. Machine learning can help identify these location-specific and time-specific patterns.
+Finally, the **day of the week** and the **area** are also useful features. Lockdown measures may vary by area and day of the week, which can influence human activities and thus air pollution levels. Machine learning can help identify these location-specific and time-specific patterns.
 
 By leveraging these features, ML models can provide a more accurate and detailed picture of how COVID-19 lockdowns have impacted air quality.
