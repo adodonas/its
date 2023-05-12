@@ -1,6 +1,10 @@
+### Students: 
+[Andrey Dodon](https://www.kaggle.com/andreydodon)</br>
+[Doron Tzur](https://www.kaggle.com/andreydodon) 
+
 # Introduction
 
-In the course of our postgraduate pursuit, we undertook a project labelled "Evaluating the COVID-19 Influence on Air Quality in Israel: A Machine Learning Perspective." The inspiration for this project was derived from a previously published investigation that delved into a related subject. Numerous research undertakings globally have probed into the consequences of the lockdown measures enforced in 2020 due to the outbreak of the Corona Virus disease on air quality. Although a common consensus is reached on the diminution of pollution, there persists a dispute over the most dependable methodology for gauging the reduction in pollution.
+In the course of our postgraduate pursuit, we undertook a project labelled "Evaluating the COVID-19 Influence on Air Quality in Israel: A Machine Learning Perspective." The inspiration for this project was derived from a previously published investigation that delved into a related subject - [Assessing the COVID-19 Impact on Air Quality: A Machine Learning Approach](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020GL091202). Numerous research undertakings globally have probed into the consequences of the lockdown measures enforced in 2020 due to the outbreak of the Corona Virus disease on air quality. Although a common consensus is reached on the diminution of pollution, there persists a dispute over the most dependable methodology for gauging the reduction in pollution.
 
 In our research, we employed machine learning models built on the Gradient Boosting Machine algorithm to measure the impact of the pandemic on the quality of air in various districts of Israel. We initially validated the precision of our forecasts by performing cross-validation over the five-year span preceding the lockdown.
 
@@ -9,15 +13,16 @@ Following this, we quantified the shifts in pollution levels during the period o
 Our objective through this project was to augment the understanding of how the COVID-19 pandemic has influenced the quality of air in Israel. By leveraging machine learning techniques, we offered valuable insights into the patterns and shifts of pollution during the lockdown phase. Our deductions underscore the significance of executing efficient strategies to curb pollution, especially in regions with heavy traffic. Moreover, our research accentuates the potential of machine learning algorithms in analysing and forecasting the dynamics of air quality amid unprecedented occurrences such as a pandemic.
 
 
-## Dataset
+# Dataset
 
-Here's a succinct overview of our dataset. During our thorough examination of multiple data sources, we encountered inconsistencies across various data fields. Consequently, we opted to gather data from specific databanks, namely the Ministry of Environmental Protection of Israel and the Meteorological Service of Israel. We also explored the databank of the Israel Central Bureau of Statistics but deemed it unsuitable due to the substantial costs associated with data cleaning and engineering.
+Here's a clear and concise summary of the data we are working with. During our thorough examination of multiple data sources, we encountered inconsistencies across various data fields. Consequently, we opted to gather data from specific databanks, namely the Ministry of Environmental Protection of Israel and the Meteorological Service of Israel. We also explored the databank of the Israel Central Bureau of Statistics but deemed it unsuitable due to the substantial costs associated with data cleaning and engineering.
 
 From the Ministry of Environmental Protection, we obtained principal pollution measures such as NO, NOX, NO2, SO2 (detailed explanations for each will follow). On the other hand, we sourced the WS, WD, and RH features from the Meteorological Service of Israel, features which have been highly recommended based on past studies. In addition to these, we incorporated categorical features such as the day of the week and area into our dataset.
+
 ![](img/diagram.png)
 
 
-### Features:
+# Features:
 * **NO:** Stands for Nitric Oxide, a colorless and poisonous gas that is a primary contributor to atmospheric pollution. It's primarily produced from the emissions of vehicles and power plants.
 
 * **NOX:** This is a generic term for the nitrogen oxides that are most relevant for air pollution, namely nitric oxide (NO) and nitrogen dioxide (NO2). These gases contribute to the formation of smog and acid rain, as well as affecting tropospheric ozone.
@@ -31,6 +36,8 @@ From the Ministry of Environmental Protection, we obtained principal pollution m
 * **WD:** Wind Direction is the direction from which the wind is coming. It's usually reported in cardinal directions or in degrees. For example, a wind coming from the north is a north wind, and a wind coming from the west is a west wind.
 
 * **RH:** Relative Humidity is the amount of moisture in the air compared to the maximum amount of moisture the air could hold at the same temperature. It's expressed as a percentage. High relative humidity can enhance the formation and persistence of certain air pollutants.
+
+## Explanatory
 
 Each of the features mentioned - **NO**, **NOX**, **NO2**, **SO2**, **WS**, **WD**, and **RH** - can provide valuable insights in the context of an air quality analysis. Here's why:
 
