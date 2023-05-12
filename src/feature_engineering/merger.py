@@ -1,19 +1,26 @@
 import os
-
 import numpy as np
 import pandas as pd
 import glob
+import logging
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 
+# Configure logging
+logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+
 
 def load_and_process_file(file_path):
-    df = pd.read_excel(file_path)
-    df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
-    df = df.dropna(subset=['timestamp'])
-    df['timestamp'] = pd.to_datetime(df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S'))
-    return df
+    try:
+        df = pd.read_excel(file_path)
+        df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
+        df = df.dropna(subset=['timestamp'])
+        df['timestamp'] = pd.to_datetime(df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S'))
+        return df
+    except Exception as e:
+        logging.error(f"Error occurred in load_and_process_file: {e}")
 
 
 def merge_and_process_files(df1, second_folder_files, prefix):
@@ -87,36 +94,39 @@ def plot_data(df):
 
 
 def process_folders(no_no2_nox_so2_folder, wd_ws_folder):
-    first_folder_files = glob.glob(os.path.join(no_no2_nox_so2_folder, '*.xlsx'))
-    second_folder_dirs = [d for d in os.listdir(wd_ws_folder) if os.path.isdir(os.path.join(wd_ws_folder, d))]
+    try:
+        first_folder_files = glob.glob(os.path.join(no_no2_nox_so2_folder, '*.xlsx'))
+        second_folder_dirs = [d for d in os.listdir(wd_ws_folder) if os.path.isdir(os.path.join(wd_ws_folder, d))]
 
-    final_df_list = []  # list to hold all final DataFrames from each prefix
+        final_df_list = []
 
-    for first_file in first_folder_files:
-        prefix = os.path.splitext(os.path.basename(first_file))[0].lower()
-        prefix = prefix.split('_')[0]
+        for first_file in first_folder_files:
+            prefix = os.path.splitext(os.path.basename(first_file))[0].lower()
+            prefix = prefix.split('_')[0]
 
-        df1 = load_and_process_file(first_file)
+            df1 = load_and_process_file(first_file)
 
-        for second_dir in second_folder_dirs:
-            if second_dir.lower() == prefix:
-                second_folder_files = glob.glob(os.path.join(wd_ws_folder, second_dir, '*.xlsx'))
-                all_merged_dfs = merge_and_process_files(df1, second_folder_files, prefix)
-                final_df_list.extend(all_merged_dfs)  # add all DataFrames from this prefix to the final list
+            for second_dir in second_folder_dirs:
+                if second_dir.lower() == prefix:
+                    second_folder_files = glob.glob(os.path.join(wd_ws_folder, second_dir, '*.xlsx'))
+                    all_merged_dfs = merge_and_process_files(df1, second_folder_files, prefix)
+                    final_df_list.extend(all_merged_dfs)
 
-    final_df = pd.concat(final_df_list, ignore_index=True)  # concatenate all DataFrames into one
-    final_df = label_encode(final_df)
-    final_df_normal = final_df.copy()  # create a copy of the original DataFrame
-    columns_to_normalize = ['NO', 'NO2', 'NOX', 'SO2', 'rh', 'wd', 'ws']
+        final_df = pd.concat(final_df_list, ignore_index=True)
+        final_df = label_encode(final_df)
+        final_df_normal = final_df.copy()
+        columns_to_normalize = ['NO', 'NO2', 'NOX', 'SO2', 'rh', 'wd', 'ws']
 
-    # Initialize a scaler, then apply it to the features
-    scaler = MinMaxScaler()
-    final_df_normal[columns_to_normalize] = scaler.fit_transform(final_df_normal[columns_to_normalize])
+        scaler = MinMaxScaler()
+        final_df_normal[columns_to_normalize] = scaler.fit_transform(final_df_normal[columns_to_normalize])
 
-    os.makedirs('results', exist_ok=True)
+        os.makedirs('results', exist_ok=True)
 
-    final_df.to_excel('results/final_merged.xlsx', index=False)  # save the final DataFrame to a single file
-    final_df_normal.to_excel('results/final_normal_merged.xlsx', index=False)
+        final_df.to_excel('results/final_merged.xlsx', index=False)
+        final_df_normal.to_excel('results/final_normal_merged.xlsx', index=False)
+
+    except Exception as e:
+        logging.error(f"Error occurred in process_folders: {e}")
 
 
 first_folder = '../../data/air_sviva_gov_il/4y/no_no2_nox_so2'
