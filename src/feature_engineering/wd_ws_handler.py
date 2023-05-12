@@ -66,7 +66,7 @@ def merge_and_aggregate_csvs(directory):
     merged_df.to_excel(f'{directory}/{prefix}_merged.xlsx', index=False)
 
 
-directory = 'W:/ws/afeka/פרויקט_גמר/its/data/air_sviva_gov_il/4y/wd_ws'
+directory = '../../data/air_sviva_gov_il/4y/wd_ws'
 
 for item in os.listdir(directory):
     # construct full item path

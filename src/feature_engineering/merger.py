@@ -119,7 +119,7 @@ def process_folders(no_no2_nox_so2_folder, wd_ws_folder):
     final_df_normal.to_excel('results/final_normal_merged.xlsx', index=False)
 
 
-first_folder = 'W:/ws/afeka/פרויקט_גמר/its/data/air_sviva_gov_il/4y/no_no2_nox_so2'
-second_folder = 'W:/ws/afeka/פרויקט_גמר/its/data/air_sviva_gov_il/4y/wd_ws'
+first_folder = '../../data/air_sviva_gov_il/4y/no_no2_nox_so2'
+second_folder = '../../data/air_sviva_gov_il/4y/wd_ws'
 
 process_folders(first_folder, second_folder)
