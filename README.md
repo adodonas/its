@@ -163,6 +163,59 @@ Human activities and thus air pollution levels can exhibit weekly cycles. For in
 industrial activities might be lower on weekends compared to weekdays, leading to lower emissions. 
 By including this feature, our model can capture such weekly patterns in air pollution.
 
+# Results
+### **Lockdown model performance**
+
+| Fold | Accuracy    | Precision   | Recall      | F1 Score    | AUC         |
+|------|-------------|-------------|-------------|-------------|-------------|
+| 1    | 0.921892189 | 0.895287958 | 0.91689008  | 0.905960265 | 0.978519767 |
+| 2    | 0.913091309 | 0.8828125   | 0.908847185 | 0.895640687 | 0.9722225   |
+| 3    | 0.927392739 | 0.898701299 | 0.927613941 | 0.91292876  | 0.981553359 |
+| 4    | 0.941694169 | 0.914507772 | 0.946380697 | 0.930171278 | 0.986007463 |
+| 5    | 0.921806167 | 0.888888889 | 0.924731183 | 0.906455863 | 0.976481002 |
+
+### Non-lockdown model performance
+
+| Fold | Accuracy    | Precision   | Recall      | F1 Score    | AUC         |
+|------|-------------|-------------|-------------|-------------|-------------|
+| 1    | 0.939050153 | 0.941194821 | 0.937538844 | 0.939363275 | 0.985989308 |
+| 2    | 0.93404272  | 0.941436464 | 0.926662523 | 0.933991074 | 0.984944212 |
+| 3    | 0.938262911 | 0.938899254 | 0.938461538 | 0.938680345 | 0.985791564 |
+| 4    | 0.936306729 | 0.940724479 | 0.932245532 | 0.936465813 | 0.98641859  |
+| 5    | 0.93685446  | 0.943717484 | 0.930080796 | 0.936849519 | 0.985678944 |
+
+The ensuing results represent performance metrics for each of the five cross-validation folds implemented during 
+both the lockdown and non-lockdown periods. Each column in the dataset provides specific insight into the model's 
+effectiveness:
+
+The **Fold** column indicates the specific number of the fold within the cross-validation process. 
+Cross-validation, a universally recognized technique, measures a model's capability to generalize to 
+independent data sets. This technique entails dividing the dataset into 'folds' (five folds in this case) 
+and repeatedly training and testing the model, with each iteration using a different fold as the test set.
+
+The **Accuracy** metric denotes the ratio of correctly predicted instances (comprising both true positives 
+and true negatives) to the total instances evaluated. This provides a measure of the overall correctness of 
+the model's predictions.
+
+**Precision** corresponds to the proportion of true positives over the sum of true positives and false positives. 
+This metric assesses the accuracy of the model's positive predictions.
+
+**Recall**, also known as sensitivity, is the fraction of true positives to the sum of true positives and false 
+negatives. This metric gauges the model's ability to correctly identify all positive instances.
+
+The **F1 Score** is the harmonic mean of precision and recall, aiming to balance these two metrics and providing a 
+composite measure of model quality.
+
+**AUC**, or Area Under the ROC Curve, is a comprehensive performance indicator. The ROC curve graphically 
+presents the true positive rate against the false positive rate at various potential thresholds of a binary classifier. 
+The AUC calculates the two-dimensional area under the entire ROC curve, providing an aggregate performance measure 
+across all potential classification thresholds. An AUC value of 1 indicates perfect predictions, whereas a value of 
+0 implies total misclassification.
+
+In the supplied data, each row signifies the performance of the model for each fold during both the lockdown 
+and non-lockdown periods. The model exhibits consistent performance across all folds, as evidenced by the accuracy, 
+F1 score, and AUC values, all of which exceed 90%.
+
 # Future Work
 Going forward, we aim to improve our model with additional data and potentially by using more advanced 
 machine learning techniques. We also aim to assess the impact of post-lockdown activities on the air 
