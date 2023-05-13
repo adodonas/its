@@ -119,8 +119,7 @@ industrial activity, vehicular traffic, among others.
 were taken. It is represented as an integer, where 0 stands for Monday and 6 stands for Sunday. Including 
 this feature allows us to capture any weekly patterns in air quality. 
 
-## Explanatory
-
+# Explanatory
 Each of the features mentioned - **NO**, **NOX**, **NO2**, **SO2**, **WS**, **WD**, and **RH** - can provide 
 valuable insights in the context of an air quality analysis. Here's why:
 
