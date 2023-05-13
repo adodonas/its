@@ -61,38 +61,6 @@ def add_day_area_and_rearrange_columns(df_merged, prefix):
     return df_merged
 
 
-def plot_data(df):
-    # Set 'timestamp' as the DataFrame's index
-    df.set_index('timestamp', inplace=True)
-
-    # Select the columns you want to resample
-    cols_to_resample = ['NO', 'NO2', 'NOX', 'SO2', 'rh', 'wd', 'ws']
-    resampled_df = df[cols_to_resample].resample('M').mean()
-
-    # Resample the columns you want to include but not take the mean of
-    # Here, we're taking the most frequent value ('mode') each month
-    cols_to_include = ['area', 'day_of_week']
-    for col in cols_to_include:
-        resampled_df[col] = df[col].resample('M').apply(lambda x: x.mode()[0] if not x.empty else np.nan)
-
-    # Reset the index
-    resampled_df.reset_index(inplace=True)
-
-    columns_to_plot = ['NO', 'NO2', 'NOX', 'SO2', 'rh', 'wd', 'ws', 'area', 'day_of_week']
-
-    # Create a figure and a set of subplots
-    fig, axs = plt.subplots(len(columns_to_plot), 1, figsize=(20, 30))
-
-    for i, col in enumerate(columns_to_plot):
-        axs[i].plot(resampled_df['timestamp'], resampled_df[col])
-        axs[i].set_title(col)
-
-    # Automatically adjust subplot parameters to give specified padding
-    fig.tight_layout()
-
-    plt.show()
-
-
 def process_folders(no_no2_nox_so2_folder, wd_ws_folder):
     try:
         first_folder_files = glob.glob(os.path.join(no_no2_nox_so2_folder, '*.xlsx'))
