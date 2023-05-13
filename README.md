@@ -15,9 +15,9 @@ Our objective through this project was to augment the understanding of how the C
 
 # Dataset
 
-Here's a clear and concise summary of the data we are working with. During our thorough examination of multiple data sources, we encountered inconsistencies across various data fields. Consequently, we opted to gather data from specific databanks, namely the Ministry of Environmental Protection of Israel and the Meteorological Service of Israel. We also explored the databank of the Israel Central Bureau of Statistics but deemed it unsuitable due to the substantial costs associated with data cleaning and engineering.
+The dataset we're using comprises data from multiple sources. However, we noticed inconsistencies across various data fields, leading us to select specific data sources. We chose to use data from the Ministry of Environmental Protection of Israel and the Meteorological Service of Israel. Although we also considered the databank of the Israel Central Bureau of Statistics, we decided against it due to the significant costs of data cleaning and engineering.
 
-From the Ministry of Environmental Protection, we obtained principal pollution measures such as NO, NOX, NO2, SO2 (detailed explanations for each will follow). On the other hand, we sourced the WS, WD, and RH features from the Meteorological Service of Israel, features which have been highly recommended based on past studies. In addition to these, we incorporated categorical features such as the day of the week and area into our dataset.
+From the Ministry of Environmental Protection, we gathered key pollution measurements such as NO, NOX, NO2, and SO2. From the Meteorological Service of Israel, we sourced the WS, WD, and RH features, which have been highly recommended in prior studies. We also incorporated categorical features like the day of the week, area, and lockdown status into our dataset.
 
 ![](img/diagram.png)
 
@@ -37,6 +37,12 @@ From the Ministry of Environmental Protection, we obtained principal pollution m
 
 * **RH:** Relative Humidity is the amount of moisture in the air compared to the maximum amount of moisture the air could hold at the same temperature. It's expressed as a percentage. High relative humidity can enhance the formation and persistence of certain air pollutants.
 
+* **Lockdown:** This is a binary feature representing whether a COVID-19 lockdown was in effect on a particular day. A value of 1 indicates that a lockdown was in effect, while a 0 indicates no lockdown. This feature is crucial in this analysis as it allows us to distinguish between periods of normal activity and those with reduced human activity due to lockdowns. It helps us understand the impact of lockdowns on the levels of air pollutants and overall air quality.
+
+* **Area:** This categorical feature represents the geographic region where the air quality measurements were taken. Different areas can have varying levels of pollutants due to factors such as population density, industrial activity, vehicular traffic, among others. 
+
+* **Day of Week:** This is a categorical feature that indicates the day of the week when the measurements were taken. It is represented as an integer, where 0 stands for Monday and 6 stands for Sunday. Including this feature allows us to capture any weekly patterns in air quality. 
+
 ## Explanatory
 
 Each of the features mentioned - **NO**, **NOX**, **NO2**, **SO2**, **WS**, **WD**, and **RH** - can provide valuable insights in the context of an air quality analysis. Here's why:
@@ -49,6 +55,9 @@ Each of the features mentioned - **NO**, **NOX**, **NO2**, **SO2**, **WS**, **WD
 
 * **RH (Relative Humidity):** Moisture in the air can react with certain pollutants, potentially leading to secondary pollutants or exacerbating pollution levels. High humidity can also trap pollutants close to the ground. Incorporating RH into ML models allows for a more comprehensive understanding of air quality dynamics during the lockdown.
 
-Finally, the **day of the week** and the **area** are also useful features. Lockdown measures may vary by area and day of the week, which can influence human activities and thus air pollution levels. Machine learning can help identify these location-specific and time-specific patterns.
+* **Lockdown:** This is a binary variable indicating whether a lockdown was in effect on a given day. The lockdown measures imposed due to COVID-19 had a profound effect on human behavior, leading to a dramatic reduction in anthropogenic activities such as vehicular movement, industrial operations, and other economic activities. This abrupt halt or scale-down of activities resulted in a significant decrease in emissions of various pollutants. Thus, the lockdown variable serves as an essential indicator of the periods during which these extraordinary conditions were in effect. By incorporating this variable into our model, we can directly evaluate the changes in air quality attributable to the lockdown periods versus the non-lockdown periods.
 
-By leveraging these features, ML models can provide a more accurate and detailed picture of how COVID-19 lockdowns have impacted air quality.
+* **Area:** This categorical variable represents different geographic regions where the measurements were taken. Different regions might have varying levels of pollutants due to differences in population density, industrial activities, vehicular movement, and other factors. By including the 'area' feature in our model, we can capture these spatial differences in air quality and investigate whether the impact of the lockdown varied across different regions.
+
+* **Day of Week:** This categorical variable represents the day of the week for each observation. Human activities and thus air pollution levels can exhibit weekly cycles. For instance, traffic volume and industrial activities might be lower on weekends compared to weekdays, leading to lower emissions. By including this feature, our model can capture such weekly patterns in air pollution.
+
