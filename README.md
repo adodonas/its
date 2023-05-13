@@ -32,35 +32,34 @@ with heavy traffic. Moreover, our research accentuates the potential of machine 
 analysing and forecasting the dynamics of air quality amid unprecedented occurrences such as a pandemic.
 
 # Methodology
-In our research, we employed machine learning models built on the Gradient Boosting Machine (GBM) algorithm to 
-measure the impact of the pandemic on the quality of air in various districts of Israel. We initially validated 
-the precision of our forecasts by performing cross-validation over the 3-year span preceding the lockdown.
+Our research methodology employed machine learning models, specifically the Gradient Boosting Machine (GBM) 
+algorithm, to examine the pandemic's impact on air quality across various districts in Israel. The model 
+was initially tested for accuracy through cross-validation across a three-year span before the lockdown.
 
-The machine learning model was developed with the following parameters:
+Here is a detailed breakdown of the machine learning model parameters and methods:
 
-* The model was trained using a Gradient Boosting Classifier.
-* The model was built with 100 decision trees (n_estimators=100), a learning rate of 0.1 (learning_rate=0.1), 
-and a max depth of 2 (max_depth=2).
-* The model used a subsampling rate of 0.8 (subsample=0.8), which means that each decision tree was 
-trained on 80% of the data, randomly sampled. This adds some randomness into the model training and 
-helps prevent overfitting.
-* We used 5-fold cross-validation to evaluate the model's performance. This technique involves dividing the 
-dataset into 5 subsets and using 4 of them for training while the remaining one is used for validation. 
-This process is repeated 5 times, with each subset used exactly once for validation. 
-The cross-validation process provides a more robust measure of the model's performance and its 
-ability to generalize to unseen data.
-Following this, we quantified the shifts in pollution levels during the period of the lockdown. 
-Our scrutiny divulged that districts with high vehicular congestion registered the most dramatic 
-decrease in pollution. As the restrictions were partially revoked, the pollution concentrations 
-started reverting to pre-pandemic figures. We buttressed our estimation of the fall in pollution by 
-evaluating the confidence of our predictions.
+* The model was built using a Gradient Boosting Classifier.
+* The model construction involved 100 decision trees (parameter n_estimators=100), a learning rate of 0.1 
+(parameter learning_rate=0.1), and a maximum tree depth of 2 (parameter max_depth=2).
+* Each decision tree was trained on a random sample consisting of 80% of the data (parameter subsample=0.8). 
+This subsampling approach adds an element of randomness to model training, aiding in the prevention of 
+overfitting.
+* We employed 5-fold cross-validation to assess the model's performance. This technique divides the dataset 
+into five subsets, using four for training and the remaining one for validation. The process is repeated 
+five times, ensuring each subset is used once for validation. Cross-validation offers a more reliable measure 
+of the model's performance and its ability to generalize to unseen data.
 
-Our objective through this project was to augment the understanding of how the COVID-19 pandemic has 
-influenced the quality of air in Israel. By leveraging machine learning techniques, we offered valuable 
-insights into the patterns and shifts of pollution during the lockdown phase. Our deductions underscore 
-the significance of executing efficient strategies to curb pollution, especially in regions with heavy traffic. 
-Moreover, our research accentuates the potential of machine learning algorithms in analysing and forecasting 
-the dynamics of air quality amid unprecedented occurrences such as a pandemic.
+Following the model's validation, we quantified the changes in pollution levels during the lockdown period. 
+Our analysis revealed that districts with high vehicular congestion experienced the most significant reduction 
+in pollution. As lockdown restrictions were gradually lifted, pollution levels began to approach pre-pandemic 
+figures. We reinforced our estimates of the pollution decrease by evaluating the confidence of our predictions.
+
+The primary objective of this project was to enhance our understanding of the COVID-19 pandemic's impact on air 
+quality in Israel. Leveraging machine learning techniques allowed us to gain valuable insights into pollution 
+patterns and shifts during the lockdown. Our findings emphasize the importance of implementing effective 
+strategies to mitigate pollution, particularly in heavily trafficked areas. Furthermore, our research highlights 
+the potential of machine learning algorithms in analyzing and predicting air quality dynamics during 
+extraordinary events such as a pandemic.
 
 # Dataset
 
