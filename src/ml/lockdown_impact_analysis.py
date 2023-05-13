@@ -1,11 +1,13 @@
+import logging
 import sys
+
 import pandas as pd
 from matplotlib import pyplot as plt
-from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, f1_score, roc_curve, auc
+from sklearn.metrics import precision_score, recall_score
+from sklearn.model_selection import StratifiedKFold
 from sklearn.utils import class_weight
-import logging
 
 
 def configure_logging():
@@ -113,15 +115,19 @@ def cross_validate(X, y):
 
     # Compute class weights to handle class imbalance
     class_weights = class_weight.compute_sample_weight('balanced', y)
-
     # Define cross-validation strategy
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
     # Instantiate the Gradient Boosting Classifier
-    gbm = GradientBoostingClassifier(n_estimators=500, learning_rate=0.05, max_depth=3, random_state=42, subsample=0.8)
+    # Decrease max_depth, increase learning_rate, and set subsample < 1 for regularization
+    gbm = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=2, random_state=42, subsample=0.8)
 
-    # A list to store the accuracy of each fold
-    scores = []
+    # Lists to store the accuracy, precision, recall and F1-score of each fold
+    accuracies = []
+    precisions = []
+    recalls = []
+    f1_scores = []
+    auc_scores = []
 
     # Perform cross-validation
     for train_index, test_index in skf.split(X, y):
@@ -134,47 +140,110 @@ def cross_validate(X, y):
 
         # Predict on the test data
         y_pred = gbm.predict(X_test)
+        y_pred_proba = gbm.predict_proba(X_test)[:, 1]  # For AUC
 
-        # Compute accuracy and F1-score
+        # Compute accuracy, precision, recall, F1-score and AUC
         accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred)
+        recall = recall_score(y_test, y_pred)
         f1 = f1_score(y_test, y_pred)
+        fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
+        auc_score = auc(fpr, tpr)
 
-        # Log the accuracy and F1-score
+        # Log the scores
         logging.info(f"Accuracy in this fold: {accuracy}")
+        logging.info(f"Precision in this fold: {precision}")
+        logging.info(f"Recall in this fold: {recall}")
         logging.info(f"F1 score in this fold: {f1}")
+        logging.info(f"AUC in this fold: {auc_score}")
 
-        # Separate the test set into lockdown and non-lockdown periods
-        X_test_lockdown = X_test[X_test['lockdown'] == 1]
-        y_test_lockdown = y_test[X_test['lockdown'] == 1]
-        X_test_non_lockdown = X_test[X_test['lockdown'] == 0]
-        y_test_non_lockdown = y_test[X_test['lockdown'] == 0]
+        # Store the scores of this fold
+        accuracies.append(accuracy)
+        precisions.append(precision)
+        recalls.append(recall)
+        f1_scores.append(f1)
+        auc_scores.append(auc_score)
 
-        # Evaluate the model performance during lockdown and non-lockdown periods
-        evaluate_period(gbm, X_test_lockdown, y_test_lockdown, 'lockdown')
-        evaluate_period(gbm, X_test_non_lockdown, y_test_non_lockdown, 'non-lockdown')
+    # Return the lists of scores and the trained model
+    return accuracies, precisions, recalls, f1_scores, auc_scores, gbm
 
-        # Store the accuracy of this fold
-        scores.append(accuracy)
 
-    # Return the list of scores and the trained model
-    return scores, gbm
+def save_to_excel(accuracies, precisions, recalls, f1_scores, auc_scores, period_name):
+    """
+    Save model performance metrics to an Excel file.
+
+    Args:
+    accuracies (List): List of accuracy scores.
+    precisions (List): List of precision scores.
+    recalls (List): List of recall scores.
+    f1_scores (List): List of F1 scores.
+    auc_scores (List): List of AUC scores.
+    period_name (str): The name of the period ('lockdown' or 'non-lockdown').
+    """
+
+    # Create a DataFrame with the performance metrics
+    df = pd.DataFrame({
+        'Fold': range(1, len(accuracies) + 1),
+        'Accuracy': accuracies,
+        'Precision': precisions,
+        'Recall': recalls,
+        'F1 Score': f1_scores,
+        'AUC': auc_scores
+    })
+
+    # Set 'Fold' as the index of the DataFrame
+    df.set_index('Fold', inplace=True)
+
+    # Save the DataFrame to an Excel file
+    df.to_excel(f'{period_name}_model_performance.xlsx')
 
 
 def main():
     configure_logging()
     X, y = load_data()
-    scores, gbm = cross_validate(X, y)
-    average_score = sum(scores) / len(scores)
-    logging.info(f"The average accuracy across all folds is {average_score}")
-    # Plot the results for the lockdown period
+
+    # Split the data into lockdown and non-lockdown periods
     X_lockdown = X[X['lockdown'] == 1]
     y_lockdown = y[X['lockdown'] == 1]
-    plot_results(gbm, X_lockdown, y_lockdown, 'lockdown')
-
-    # Plot the results for the non-lockdown period
     X_non_lockdown = X[X['lockdown'] == 0]
     y_non_lockdown = y[X['lockdown'] == 0]
-    plot_results(gbm, X_non_lockdown, y_non_lockdown, 'non-lockdown')
+
+    # Train a model on the lockdown period
+    accuracies, precisions, recalls, f1_scores, auc_scores, gbm_lockdown = cross_validate(X_lockdown, y_lockdown)
+    save_to_excel(accuracies, precisions, recalls, f1_scores, auc_scores, 'lockdown')
+    average_accuracy = sum(accuracies) / len(accuracies)
+    average_precision = sum(precisions) / len(precisions)
+    average_recall = sum(recalls) / len(recalls)
+    average_f1_score = sum(f1_scores) / len(f1_scores)
+    average_auc_score = sum(auc_scores) / len(auc_scores)
+
+    logging.info(f"The average accuracy across all folds during lockdown is {average_accuracy}")
+    logging.info(f"The average precision across all folds during lockdown is {average_precision}")
+    logging.info(f"The average recall across all folds during lockdown is {average_recall}")
+    logging.info(f"The average F1 score across all folds during lockdown is {average_f1_score}")
+    logging.info(f"The average AUC across all folds during lockdown is {average_auc_score}")
+
+    # Plot the results for the lockdown period
+    # plot_results(gbm_lockdown, X_lockdown, y_lockdown, 'lockdown')
+
+    # Train a model on the non-lockdown period
+    accuracies, precisions, recalls, f1_scores, auc_scores, gbm_non_lockdown = cross_validate(X_non_lockdown,
+                                                                                              y_non_lockdown)
+    save_to_excel(accuracies, precisions, recalls, f1_scores, auc_scores, 'non-lockdown')
+    average_accuracy = sum(accuracies) / len(accuracies)
+    average_precision = sum(precisions) / len(precisions)
+    average_recall = sum(recalls) / len(recalls)
+    average_f1_score = sum(f1_scores) / len(f1_scores)
+    average_auc_score = sum(auc_scores) / len(auc_scores)
+
+    logging.info(f"The average accuracy across all folds during non-lockdown is {average_accuracy}")
+    logging.info(f"The average precision across all folds during non-lockdown is {average_precision}")
+    logging.info(f"The average recall across all folds during non-lockdown is {average_recall}")
+    logging.info(f"The average F1 score across all folds during non-lockdown is {average_f1_score}")
+    logging.info(f"The average AUC across all folds during non-lockdown is {average_auc_score}")
+
+    # Plot the results for the non-lockdown period
+    # plot_results(gbm_non_lockdown, X_non_lockdown, y_non_lockdown, 'non-lockdown')
 
 
 if __name__ == "__main__":
