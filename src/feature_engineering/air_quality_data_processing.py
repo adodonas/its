@@ -38,6 +38,10 @@ def merge_and_process_files(df1, second_folder_files, prefix):
 
         df_merged = add_day_area_and_rearrange_columns(df_merged, prefix)
 
+        lockdown_dates = [("2020-03-17", "2020-04-19"), ("2020-09-11", "2020-10-13"), ("2020-12-27", "2021-02-07")]
+
+        df_merged['lockdown'] = df_merged['timestamp'].apply(lambda date: is_in_lockdown(date, lockdown_dates))
+
         all_merged_dfs.append(df_merged)  # add this DataFrame to the list
 
     return all_merged_dfs
@@ -59,6 +63,16 @@ def add_day_area_and_rearrange_columns(df_merged, prefix):
     df_merged['station'] = station  # add it back, this will add it at the end
     df_merged['area'] = prefix  # add area column
     return df_merged
+
+
+def is_in_lockdown(date, lockdown_dates):
+    for start, end in lockdown_dates:
+        start = pd.to_datetime(start)
+        end = pd.to_datetime(end)
+        if start <= date <= end:
+            return 1
+    return 0
+
 
 
 def process_folders(no_no2_nox_so2_folder, wd_ws_folder):
