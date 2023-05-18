@@ -244,21 +244,7 @@ def plot_NO_levels_stem(df):
     # Convert 'timestamp' column to datetime and set it as index
     df.set_index('timestamp', inplace=True)
 
-    # Define date ranges for the events
-    lockdown_dates = create_lockdown_dates()
-    yom_kippur_dates = create_yom_kippur_dates()
-    shavuot_dates = create_shavuot_dates()
-    passover_dates = create_passover_dates()
-    rosh_hashana_dates = create_rosh_hashana_dates()
-    sukkot_dates = create_sukkot_dates()
-
-    # Filter the data according to the events
-    lockdown_data = filter_data(df, lockdown_dates)
-    yom_kippur_data = filter_data(df, yom_kippur_dates)
-    shavuot_data = filter_data(df, shavuot_dates)
-    passover_data = filter_data(df, passover_dates)
-    rosh_hashana_data = filter_data(df, rosh_hashana_dates)
-    sukkot_data = filter_data(df, sukkot_dates)
+    lockdown_data, passover_data, rosh_hashana_data, shavuot_data, sukkot_data, yom_kippur_data = get_data(df)
 
     # Create stem plots
     plt.figure(figsize=(16, 8))
@@ -280,6 +266,24 @@ def plot_NO_levels_stem(df):
     # Save the plot
     plt.savefig('NO_levels_stem_plot.png')
     logging.info("Plot saved as 'NO_levels_stem_plot.png'.")
+
+
+def get_data(df):
+    # Define date ranges for the events
+    lockdown_dates = create_lockdown_dates()
+    yom_kippur_dates = create_yom_kippur_dates()
+    shavuot_dates = create_shavuot_dates()
+    passover_dates = create_passover_dates()
+    rosh_hashana_dates = create_rosh_hashana_dates()
+    sukkot_dates = create_sukkot_dates()
+    # Filter the data according to the events
+    lockdown_data = filter_data(df, lockdown_dates)
+    yom_kippur_data = filter_data(df, yom_kippur_dates)
+    shavuot_data = filter_data(df, shavuot_dates)
+    passover_data = filter_data(df, passover_dates)
+    rosh_hashana_data = filter_data(df, rosh_hashana_dates)
+    sukkot_data = filter_data(df, sukkot_dates)
+    return lockdown_data, passover_data, rosh_hashana_data, shavuot_data, sukkot_data, yom_kippur_data
 
 
 def plot_stem(data, column, label):
@@ -346,6 +350,20 @@ def create_individual_stem_plot(data, column, linefmt, basefmt, label):
     plt.setp(stemlines, 'linewidth', 1)
 
 
+def calculate_regular_NO_level(df):
+    # Convert 'timestamp' column to datetime if it's not
+    if df.index.dtype != 'datetime64[ns]':
+        df.set_index(pd.to_datetime(df['timestamp']), inplace=True)
+
+    # Adjust the data for Israeli working days (6 is Sunday and 3 is Thursday in dt.weekday)
+    working_days_data = df[(df.index.weekday < 4) | (df.index.weekday == 6)]
+
+    # Calculate the average NO level for working days
+    regular_NO_level = working_days_data['NO'].mean()
+    logging.info(f'Average NO level for working days: {regular_NO_level}')
+    return regular_NO_level
+
+
 def perform_statistical_analysis():
     # Set up logging
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -377,7 +395,7 @@ def perform_statistical_analysis():
     logging.info('Creating plot...')
     plot_NO_levels(df)
     plot_NO_levels_stem(df)
-
+    calculate_regular_NO_level(df)
     logging.info(f'Summary saved as {summary_filename}. Done.')
 
 
