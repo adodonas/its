@@ -216,6 +216,39 @@ In the supplied data, each row signifies the performance of the model for each f
 and non-lockdown periods. The model exhibits consistent performance across all folds, as evidenced by the accuracy, 
 F1 score, and AUC values, all of which exceed 90%.
 
+# Jewish Holidays Hypothesis
+During the course of our study, we observed an interesting phenomenon that appeared to coincide with certain Jewish 
+holidays. Particularly, we noticed a drop in pollutant levels during these periods, mirroring, to some extent, the 
+effects seen during the COVID-19 lockdowns.
+
+Our hypothesis is that these reductions in pollutant levels are due to decreased human activities during Jewish 
+holidays, similar to the effect observed during lockdowns. This phenomenon is quite plausible considering that many 
+businesses shut down, and a significant portion of the population refrain from driving or operating machinery during 
+Jewish holidays, following religious traditions.
+
+To further investigate this hypothesis, we propose to extend our research model to include Jewish holidays as an 
+additional categorical feature. This will allow us to discern the impact of these holidays on air quality and 
+compare it with the effects of the COVID-19 lockdowns.
+
+The Jewish holidays we plan to consider include, but are not limited to, Rosh Hashanah (Jewish New Year), 
+Yom Kippur (Day of Atonement), Sukkot (Feast of Tabernacles), Hanukkah (Festival of Lights), and Passover. 
+These holidays are particularly relevant as they typically involve strict observances that significantly alter daily 
+routines, including restrictions on work, travel, and use of electrical appliances, among others.
+
+The incorporation of Jewish holidays into our model will help us understand whether and to what extent temporary 
+cessations of human activities during these periods affect air quality. Furthermore, by comparing the effects of 
+these holidays with the impact of the COVID-19 lockdowns, we can better comprehend the relationship between human 
+activities and air pollution in Israel.
+
+This hypothesis, if validated, could have significant implications for air quality management strategies. For 
+instance, policies encouraging voluntary reduction in vehicular movement and industrial activities during specific 
+periods could be implemented to improve air quality. Additionally, it would provide a broader perspective on how 
+behavioral changes influenced by cultural or religious practices can impact the environment.
+
+We believe that exploring this hypothesis will not only contribute to the scientific understanding of the factors 
+affecting air quality but also offer valuable insights for policymakers, environmentalists, and the public. 
+Ultimately, our goal is to promote strategies that lead to cleaner air and a healthier environment.
+
 # Future Work
 Going forward, we aim to improve our model with additional data and potentially by using more advanced 
 machine learning techniques. We also aim to assess the impact of post-lockdown activities on the air 
