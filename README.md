@@ -240,6 +240,9 @@ cessations of human activities during these periods affect air quality. Furtherm
 these holidays with the impact of the COVID-19 lockdowns, we can better comprehend the relationship between human 
 activities and air pollution in Israel.
 
+![](img/NO_levels_specific_periods.png)
+![](img/NO_levels_stem_plot.png)
+
 This hypothesis, if validated, could have significant implications for air quality management strategies. For 
 instance, policies encouraging voluntary reduction in vehicular movement and industrial activities during specific 
 periods could be implemented to improve air quality. Additionally, it would provide a broader perspective on how 
