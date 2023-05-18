@@ -249,13 +249,44 @@ We believe that exploring this hypothesis will not only contribute to the scient
 affecting air quality but also offer valuable insights for policymakers, environmentalists, and the public. 
 Ultimately, our goal is to promote strategies that lead to cleaner air and a healthier environment.
 
-# Future Work
-Going forward, we aim to improve our model with additional data and potentially by using more advanced 
-machine learning techniques. We also aim to assess the impact of post-lockdown activities on the air 
-quality and to draw insights that can help in policymaking to maintain the improved air quality levels 
-witnessed during the lockdowns.
+# Planned Enhancements and Future Directions
+In our pursuit of refining and improving our model, we envision incorporating additional data and exploring advanced 
+machine learning techniques. Additionally, we aim to investigate the impact of post-lockdown activities on air quality. 
+The insights gleaned from this analysis can inform policymaking endeavors, helping to maintain the improved air quality 
+levels observed during lockdown periods.
 
-We believe that the work presented here provides a promising direction for future research into the impact 
-of extraordinary events, such as pandemics or economic recessions, on the environment. By understanding 
-these impacts, we can find ways to mitigate the negative effects and improve the quality of life for all 
-residents.
+The body of work presented here establishes a promising trajectory for future inquiries into the environmental 
+repercussions of extraordinary occurrences, including pandemics and economic downturns. Understanding these impacts 
+paves the way towards mitigating adverse effects and enhancing quality of life for all residents.
+
+## Inclusion of Highway Proximity in Air Quality Analysis
+As part of our dataset augmentation, we are considering the introduction of a new feature: the distance from an air 
+quality monitoring station to the nearest highway. This feature presents multiple benefits:
+
+**Emissions Source Proximity:** Highways, being major vectors for vehicular emissions, significantly contribute to 
+the concentration of air pollutants such as NO, NO2, NOX, and SO2. Stations in proximity to highways are expected 
+to register heightened pollutant concentrations.
+
+**Localized Pollution Impact:** Pollution exhibits a localized nature. The influence of vehicular emissions might 
+not uniformly disperse across extensive areas. Factoring in a station's highway proximity facilitates a more accurate 
+depiction of localized pollution scenarios.
+
+**Lockdown Impact Assessment:** The reduction in highway traffic as a result of COVID-19 lockdowns could have affected 
+air quality more profoundly near highways. Integrating a highway proximity feature could assist in quantifying the 
+effects of lockdown initiatives on air quality, particularly for stations near major roads.
+
+**Model Granularity Enhancement:** Incorporating the highway proximity feature could lend an additional layer of 
+granularity to our model, enabling it to capture more nuanced spatial patterns in pollution levels.
+
+Nonetheless, the incorporation of this feature is accompanied by certain challenges:
+
+**Data Accuracy:** For this feature to be effective, precise and reliable data on highway locations and their 
+corresponding distances from each station are indispensable.
+
+**Interplay of Multiple Factors:** Highway proximity is only one of the myriad factors influencing pollution levels. 
+Other factors, including wind direction, topography, and local emission sources, also significantly contribute and 
+must be taken into consideration.
+
+**Model Complexity Trade-Off:** Introducing this feature could increase model complexity, potentially complicating 
+interpretation. It's crucial to maintain a balance between the potential for enhanced prediction accuracy and the 
+risk of increased model complexity.
