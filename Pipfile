@@ -14,6 +14,7 @@ seaborn = "~=0.12.2"
 scikit-learn = "~=1.2.2"
 openpyxl = "*"
 requests = "*"
+markdown = "*"
 
 [dev-packages]
 
