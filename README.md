@@ -63,16 +63,26 @@ extraordinary events such as a pandemic.
 
 # Dataset
 
-The dataset we're using comprises data from multiple sources. However, we noticed inconsistencies 
-across various data fields, leading us to select specific data sources. We chose to use data from the 
-Ministry of Environmental Protection of Israel and the Meteorological Service of Israel. Although we 
-also considered the databank of the Israel Central Bureau of Statistics, we decided against it due to the 
-significant costs of data cleaning and engineering.
+The dataset utilized in our study amalgamates data from several sources, primarily from the Ministry of 
+Environmental Protection of Israel and the Meteorological Service of Israel. Unfortunately, we encountered 
+discrepancies across different data fields, prompting us to focus on these two specific sources. The Israel 
+Central Bureau of Statistics' databank, while considered, was excluded due to the substantial costs associated 
+with data cleaning and engineering.
 
-From the Ministry of Environmental Protection, we gathered key pollution measurements such as 
-NO, NOX, NO2, and SO2. From the Meteorological Service of Israel, we sourced the WS, WD, and RH features, 
-which have been highly recommended in prior studies. We also incorporated categorical features like the day 
-of the week, area, and lockdown status into our dataset.
+From the Ministry of Environmental Protection, we procured essential pollution measurements such as Nitric Oxide (NO), 
+Nitrogen Oxides (NOX), Nitrogen Dioxide (NO2), and Sulfur Dioxide (SO2). The Meteorological Service of Israel provided 
+us with data for Wind Speed (WS), Wind Direction (WD), and Relative Humidity (RH), features that have been strongly 
+endorsed in previous studies.
+
+Additionally, we included categorical features such as the day of the week, area, and lockdown status into our dataset. 
+These categorical variables offer additional contextual information that can help improve the accuracy of our model's 
+predictions.
+
+To accurately measure pollution levels during both lockdown and non-lockdown periods, we utilized the aforementioned 
+features which are all publicly available, thereby allowing for the transparency and reproducibility of our study. 
+This public availability ensures that our research can be scrutinized, replicated, and further built upon by other 
+researchers, thereby contributing to a broader and more collaborative scientific understanding of pollution dynamics 
+in relation to human activities.
 
 ![](img/diagram.png)
 
