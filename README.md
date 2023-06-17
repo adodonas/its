@@ -217,50 +217,76 @@ and non-lockdown periods. The model exhibits consistent performance across all f
 F1 score, and AUC values, all of which exceed 90%.
 
 # Jewish Holidays Hypothesis
-During the course of our study, we observed an interesting phenomenon that appeared to coincide with certain Jewish 
-holidays. Particularly, we noticed a drop in pollutant levels during these periods, mirroring, to some extent, the 
-effects seen during the COVID-19 lockdowns.
+During the course of our study, we observed an intriguing phenomenon: a noticeable decrease in pollutant levels 
+coinciding with certain Jewish holidays. This effect appears to mirror, to a certain extent, the pollution reductions 
+witnessed during the COVID-19 lockdowns.
 
-Our hypothesis is that these reductions in pollutant levels are due to decreased human activities during Jewish 
-holidays, similar to the effect observed during lockdowns. This phenomenon is quite plausible considering that many 
-businesses shut down, and a significant portion of the population refrain from driving or operating machinery during 
-Jewish holidays, following religious traditions.
+Our initial hypothesis was that these reductions in pollutant levels were a result of decreased human activities during 
+Jewish holidays, an effect similar to that observed during lockdowns. This notion is not far-fetched, considering that 
+many businesses shut down and a substantial segment of the population abstains from driving or operating machinery 
+during Jewish holidays in observance of religious traditions.
 
-To further investigate this hypothesis, we propose to extend our research model to include Jewish holidays as an 
-additional categorical feature. This will allow us to discern the impact of these holidays on air quality and 
-compare it with the effects of the COVID-19 lockdowns.
+However, we have now refined this hypothesis to propose that specific activities, usually paused during Jewish holidays 
+but continuing through the COVID-19 lockdowns, may significantly contribute to these observed pollutant levels. This 
+implies that Jewish holidays could result in a more pronounced decrease in pollution compared to the lockdowns due to 
+the more comprehensive suspension of certain pollution-generating activities.
 
-The Jewish holidays we plan to consider include, but are not limited to, Rosh Hashanah (Jewish New Year), 
-Yom Kippur (Day of Atonement), Sukkot (Feast of Tabernacles), Hanukkah (Festival of Lights), and Passover. 
-These holidays are particularly relevant as they typically involve strict observances that significantly alter daily 
-routines, including restrictions on work, travel, and use of electrical appliances, among others.
+To investigate this hypothesis further, we intend to extend our research model to include Jewish holidays as an 
+additional categorical feature. This will enable us to evaluate the impact of these holidays on air quality and 
+contrast it with the effects of the COVID-19 lockdowns. Moreover, it becomes essential to identify these unique 
+activities halted during Jewish holidays and quantify their typical contribution to pollution levels.
 
-The incorporation of Jewish holidays into our model will help us understand whether and to what extent temporary 
-cessations of human activities during these periods affect air quality. Furthermore, by comparing the effects of 
-these holidays with the impact of the COVID-19 lockdowns, we can better comprehend the relationship between human 
-activities and air pollution in Israel.
+The Jewish holidays we aim to consider encompass Rosh Hashanah (Jewish New Year), Yom Kippur (Day of Atonement), 
+Sukkot (Feast of Tabernacles), Hanukkah (Festival of Lights), and Passover. The relevance of these holidays lies in 
+their stringent observances that significantly alter daily routines, including restrictions on work, travel, and the 
+use of electrical appliances, among others.
 
+The integration of Jewish holidays into our model will assist in discerning whether and to what extent temporary 
+cessations of human activities during these periods affect air quality. By juxtaposing the effects of these holidays 
+with the impact of the COVID-19 lockdowns, we aim to deepen our understanding of the relationship between human 
+activities and air pollution, specifically in Israel.
 ![](img/NO_levels_specific_periods.png)
 ![](img/NO_levels_stem_plot.png)
+If validated, this hypothesis could have considerable implications for air quality management strategies. Policies 
+encouraging the voluntary reduction of specific activities during designated periods could be implemented to improve 
+air quality. This approach would not only provide a broader perspective on how behavioral changes influenced by 
+cultural or religious practices can impact the environment but also offer valuable insights for policymakers, 
+environmentalists, and the public.
 
-This hypothesis, if validated, could have significant implications for air quality management strategies. For 
-instance, policies encouraging voluntary reduction in vehicular movement and industrial activities during specific 
-periods could be implemented to improve air quality. Additionally, it would provide a broader perspective on how 
-behavioral changes influenced by cultural or religious practices can impact the environment.
+We posit that the exploration of this hypothesis will contribute to the scientific understanding of factors affecting 
+air quality and propose strategies that lead to cleaner air and a healthier environment. However, the sensitivity of 
+religious observances must be recognized, and communities must be actively involved in discussions about potential 
+modifications to routines. Our ultimate goal is to promote strategies that strike a balance between cultural respect 
+and environmental health.
 
-We believe that exploring this hypothesis will not only contribute to the scientific understanding of the factors 
-affecting air quality but also offer valuable insights for policymakers, environmentalists, and the public. 
-Ultimately, our goal is to promote strategies that lead to cleaner air and a healthier environment.
 
 # Planned Enhancements and Future Directions
-In our pursuit of refining and improving our model, we envision incorporating additional data and exploring advanced 
-machine learning techniques. Additionally, we aim to investigate the impact of post-lockdown activities on air quality. 
-The insights gleaned from this analysis can inform policymaking endeavors, helping to maintain the improved air quality 
-levels observed during lockdown periods.
+As we continue to refine our model, we plan on incorporating additional data sets and applying advanced machine 
+learning techniques to further improve its performance and predictive capabilities. A specific area of interest 
+includes the exploration of H2O AutoML, a versatile automated machine learning platform. The potential integration 
+of this tool could significantly enhance our model's efficacy by automating the machine learning workflow, enabling 
+us to analyze more complex patterns and relationships within our data.
 
-The body of work presented here establishes a promising trajectory for future inquiries into the environmental 
-repercussions of extraordinary occurrences, including pandemics and economic downturns. Understanding these impacts 
-paves the way towards mitigating adverse effects and enhancing quality of life for all residents.
+Additionally, we aim to investigate the impact of post-lockdown activities on air quality, recognizing that the 
+resumption of typical routines could potentially erode the improved air quality levels observed during lockdown periods. 
+A granular understanding of these impacts could help inform policymaking efforts, thereby maintaining these enhanced 
+air quality levels and positively affecting the health of the population.
+
+One area we plan to delve into with greater depth is the effect of Jewish holidays on air pollution levels. By 
+including these events as significant categorical variables in our model, we aim to understand the extent to which 
+these religious observances, and the subsequent reduction in specific activities, contribute to improved air quality. 
+These inquiries would extend beyond traditional "business as usual" scenarios to uncover how religious and cultural 
+practices can positively impact the environment. We hope to leverage these insights to recommend policies that respect 
+these traditions while also benefiting the environment.
+
+The work conducted and presented thus far establishes a promising trajectory for future research into the environmental 
+repercussions of extraordinary events, including pandemics, religious holidays, and economic downturns. Understanding 
+these impacts is critical in paving the way towards mitigating adverse effects, implementing effective pollution 
+reduction strategies, and ultimately enhancing the quality of life for all residents.
+
+In sum, we believe these planned enhancements and directions for future research will significantly contribute to the 
+evolving field of environmental management, offering valuable insights for policymakers, environmentalists, and the 
+public at large.
 
 ## Inclusion of Highway Proximity in Air Quality Analysis
 As part of our dataset augmentation, we are considering the introduction of a new feature: the distance from an air 
