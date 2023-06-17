@@ -245,8 +245,10 @@ The integration of Jewish holidays into our model will assist in discerning whet
 cessations of human activities during these periods affect air quality. By juxtaposing the effects of these holidays 
 with the impact of the COVID-19 lockdowns, we aim to deepen our understanding of the relationship between human 
 activities and air pollution, specifically in Israel.
+
 ![](img/NO_levels_specific_periods.png)
 ![](img/NO_levels_stem_plot.png)
+
 If validated, this hypothesis could have considerable implications for air quality management strategies. Policies 
 encouraging the voluntary reduction of specific activities during designated periods could be implemented to improve 
 air quality. This approach would not only provide a broader perspective on how behavioral changes influenced by 
